@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "date": "2026-11-12",
+  "checks": {
+    "default_master_byte_identical": true,
+    "svg_xml_validated": 60,
+    "png_decoded": 156,
+    "original_body_preserved_in_all_icon_variants": true,
+    "avatar_circle_safe": true,
+    "maskable_circle_safe": true,
+    "pdf_pages": 8,
+    "favicon_sizes": [
+      16,
+      32,
+      48,
+      64
+    ]
+  },
+  "animation": {
+    "clovers-loop.gif": {
+      "frames": 23,
+      "duration_ms": 6400,
+      "loop": 0
+    },
+    "clovers-loop.webp": {
+      "frames": 23,
+      "duration_ms": 6400,
+      "loop": 0
+    },
+    "clovers-once-coding.gif": {
+      "frames": 11,
+      "duration_ms": 1200,
+      "loop": null
+    },
+    "clovers-once-coding.webp": {
+      "frames": 11,
+      "duration_ms": 1200,
+      "loop": 1
+    },
+    "clovers-once-thinking.gif": {
+      "frames": 11,
+      "duration_ms": 1200,
+      "loop": null
+    },
+    "clovers-once-thinking.webp": {
+      "frames": 11,
+      "duration_ms": 1200,
+      "loop": 1
+    }
+  },
+  "contrast": {
+    "forest_on_white": 7.83,
+    "green_on_white": 3.2
+  },
+  "errors": []
+}

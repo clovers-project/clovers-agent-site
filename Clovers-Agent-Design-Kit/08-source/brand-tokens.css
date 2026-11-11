@@ -1,0 +1,23 @@
+:root {
+  --clovers-green: #20A464;
+  --clovers-forest: #175D43;
+  --clovers-mint: #C9EFBE;
+  --clovers-paper: #F4F7F2;
+  --clovers-ink: #123C2D;
+  --clovers-night: #102B22;
+  --clovers-muted: #63786B;
+  --clovers-line: #DCE6DC;
+  --clovers-white: #FFFFFF;
+  --clovers-black: #000000;
+  --clovers-body: var(--clovers-green);
+  --clovers-eyes: var(--clovers-forest);
+  --clovers-radius-sm: 12px;
+  --clovers-radius-lg: 24px;
+  --clovers-space-unit: 8px;
+  --clovers-font: Inter, "Microsoft YaHei", system-ui, sans-serif;
+  --clovers-motion-loop: 6.4s;
+}
+[data-clovers-theme="dark"] {
+  --clovers-body: var(--clovers-mint);
+  --clovers-eyes: var(--clovers-white);
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Clovers Agent · Design Kit 02</title>
+  <link rel="icon" href="06-web/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#home"><img src="01-core/clovers-default.svg" alt="" width="40" height="40"><span>clovers <b>agent</b><small>DESIGN KIT 02</small></span></a>
+  <nav aria-label="设计包导航"><a href="#expressions">表情</a><a href="#applications">应用</a><a href="#motion">动效</a><a href="#library">资源库</a></nav>
+  <a class="guide-link" href="07-guidelines/Clovers-Agent-Brand-Guide-v2.pdf">品牌规范 ↗</a>
+</header>
+<main id="home">
+  <section class="hero">
+    <div class="hero-copy"><div class="eyebrow"><span class="dot"></span> CLOVERS AGENT / VISUAL IDENTITY V2.0</div>
+      <h1>会回应，<br>也会认真思考<span>。</span></h1>
+      <p>聊天气泡里，住着一片四叶草。<br>从日常回应到专注 Coding，再到努力思考，<br class="desktop-break">每个状态都有自己的表情。</p>
+      <div class="hero-actions"><a class="button solid" href="#library">浏览全部资源 <span>↓</span></a><a class="text-link" href="brand-overview.png">查看品牌总览 ↗</a></div>
+      <div class="hero-meta"><span>03 种表情</span><span>06 套配色</span><span>完全离线可用</span></div>
+    </div>
+    <div class="playground">
+      <div class="stage-top"><span>MEET YOUR LITTLE AGENT</span><span id="stage-index">01 / 03</span></div>
+      <div class="logo-stage" id="logo-stage" data-background="light"><div id="live-logo"></div><span class="stage-caption" id="stage-caption">随时回应。</span></div>
+      <div class="playground-controls">
+        <div class="segmented" role="group" aria-label="选择表情"><button class="active" data-expression="default" aria-pressed="true">默认</button><button data-expression="coding" aria-pressed="false">Coding &gt;_</button><button data-expression="thinking" aria-pressed="false">思考 &gt;&lt;</button></div>
+        <div class="background-controls" role="group" aria-label="预览背景"><button class="swatch light active" data-background="light" aria-label="浅色背景" aria-pressed="true"></button><button class="swatch dark" data-background="dark" aria-label="深色背景" aria-pressed="false"></button><button class="swatch checker" data-background="transparent" aria-label="透明背景" aria-pressed="false"></button></div>
+      </div>
+      <a id="current-download" class="stage-download" download href="01-core/clovers-default.svg">下载当前 SVG <span>↗</span></a>
+    </div>
+  </section>
+  <section id="expressions" class="section">
+    <div class="section-heading"><div><div class="eyebrow">01 / EXPRESSION SYSTEM</div><h2>同一个伙伴，三种状态。</h2></div><p>保留气泡、四叶草和提示线。<br>眼睛传达状态，轮廓保持统一。</p></div>
+    <div class="expression-grid">
+      <article class="expression-card"><div class="card-index">01 / DEFAULT</div><img src="01-core/clovers-default.svg" alt="Clovers Agent 默认表情"><h3>随时回应<span>••</span></h3><p>默认标识、日常对话、待命状态。</p><a download href="01-core/clovers-default.svg">下载 SVG ↗</a></article>
+      <article class="expression-card"><div class="card-index">02 / CODING</div><img src="01-core/clovers-coding.svg" alt="Clovers Agent Coding 大于号与下划线表情"><h3>正在编写<span>&gt;_</span></h3><p>编写代码、执行任务、技术协作。</p><a download href="01-core/clovers-coding.svg">下载 SVG ↗</a></article>
+      <article class="expression-card"><div class="card-index">03 / THINKING</div><img src="01-core/clovers-thinking.svg" alt="Clovers Agent 努力思考 双向内尖括号表情"><h3>认真推敲<span>&gt;&lt;</span></h3><p>分析问题、规划步骤、努力思考。</p><a download href="01-core/clovers-thinking.svg">下载 SVG ↗</a></article>
+    </div>
+  </section>
+  <section class="palette-section section">
+    <div class="section-heading"><div><div class="eyebrow">02 / COLOR LANGUAGE</div><h2>让绿色，有自己的层次。</h2></div><p>前两色来自新版原稿。<br>其余为配套场景扩展色。</p></div>
+    <div class="palette-grid" id="palette-grid"></div><div class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></div>
+  </section>
+  <section id="applications" class="section">
+    <div class="section-heading"><div><div class="eyebrow">03 / IN THE REAL WORLD</div><h2>放进产品，也放进日常。</h2></div><a class="text-link" href="08-source/identity-artboard.svg">打开可编辑画板 ↗</a></div>
+    <div class="application-grid">
+      <div class="wordmark-tile"><span class="card-index">HORIZONTAL WORDMARK</span><img src="04-wordmarks/svg/horizontal-primary.svg" alt="Clovers Agent 横排字标"><a download href="04-wordmarks/svg/horizontal-primary.svg">横排字标 / 已转曲 SVG ↗</a></div>
+      <div class="avatar-tile"><span class="card-index">AVATARS / LIGHT + DARK</span><div><img src="03-avatars/png/default-light-512.png" alt="浅底默认头像"><img src="03-avatars/png/coding-dark-512.png" alt="深底 Coding 头像"><img src="03-avatars/png/thinking-green-512.png" alt="绿色思考头像"></div><a href="#library">3 个表情 × 3 种底色 ↗</a></div>
+      <a class="social-tile" href="09-social/og.png"><img src="09-social/og.png" alt="Clovers Agent 社交分享封面"></a>
+      <div class="chat-tile"><span class="card-index">A SMALL MOMENT OF FOCUS</span><div class="message user-message">帮我想想，怎样写得更好？</div><div class="agent-message"><img src="01-core/clovers-thinking.svg" alt=""><div><strong>Clovers Agent</strong><p>正在认真推敲…</p><span>努力思考 &gt;&lt;</span></div></div><p class="tile-note">产品状态示意 · 用表情辅助文字反馈</p></div>
+    </div>
+  </section>
+  <section id="motion" class="section">
+    <div class="section-heading"><div><div class="eyebrow">04 / QUIET MOTION</div><h2>只动表情，轻轻回应。</h2></div><p>6.4 秒循环 · 1.2 秒单次切换<br>支持“减少动态效果”偏好。</p></div>
+    <div class="motion-grid">
+      <article class="motion-card"><span class="card-index">LOOP / 6.4S</span><img src="05-animation/svg/loop-primary.svg" alt="默认、Coding、思考循环动画"><h3>默认 → Coding → 思考</h3><a download href="05-animation/svg/loop-primary.svg">循环 SVG ↗</a><a download href="05-animation/previews/clovers-loop.webp">透明 WebP ↗</a></article>
+      <article class="motion-card dark-card"><span class="card-index">ONCE / 1.2S</span><img id="once-preview" src="05-animation/svg/once-thinking-reverse.svg" alt="切换到努力思考的单次动画"><h3>进入专注状态</h3><button class="replay-button" id="replay-animation">重新播放 ↻</button><a download href="05-animation/svg/once-thinking-reverse.svg">单次 SVG ↗</a></article>
+    </div>
+  </section>
+  <section id="library" class="section">
+    <div class="section-heading"><div><div class="eyebrow">05 / ASSET LIBRARY</div><h2>找到你需要的那一份。</h2></div><a href="README.zh-CN.md" class="text-link">阅读交付说明 ↗</a></div>
+    <div class="library-tools"><label>资源分类<select id="asset-category"><option value="all">全部资源</option><option value="icons">图标</option><option value="avatars">头像</option><option value="wordmarks">字标</option><option value="animation">动效</option><option value="web">网页</option><option value="social">社交素材</option><option value="source">规范与源文件</option></select></label><label class="search-label">搜索文件<input id="asset-search" type="search" placeholder="例如 thinking、512、reverse"></label><span id="result-count" aria-live="polite"></span></div>
+    <div class="asset-list" id="asset-list"></div><button class="load-more" id="load-more">显示更多资源</button>
+  </section>
+  <section class="handoff"><div><div class="eyebrow">BUILT TO KEEP GROWING</div><h2>从一个 Logo，到一套完整语言。</h2><p>规范、配色、动效时序和可再生成源文件，全部在包内。</p></div><a class="button light-button" href="07-guidelines/Clovers-Agent-Brand-Guide-v2.pdf">打开品牌手册 ↗</a></section>
+</main>
+<footer><span>Clovers Agent / Design Kit 2.0</span><span>2026.11.12 · Made for a little more possibility.</span></footer>
+<script src="preview-data.js"></script><script src="preview.js"></script>
+</body>
+</html>

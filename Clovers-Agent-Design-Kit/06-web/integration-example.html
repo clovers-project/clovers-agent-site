@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clovers Agent · 网页接入示例</title><link rel="icon" href="favicon.svg">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7f2;color:#175d43;font:15px/1.7 system-ui,"Microsoft YaHei",sans-serif}main{max-width:900px;margin:55px auto;padding:0 25px}h1{font-size:32px;line-height:1.4}p{color:#63786b}section{background:white;padding:26px;border-radius:16px;margin:20px 0}.row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}clovers-logo{width:160px}clovers-logo img{display:block;width:160px;height:160px}.dark{background:#102b22;color:white}.dark p{color:#c9efbe}.dark clovers-logo{--clovers-body:#c9efbe;--clovers-eyes:#fff}button{border:1px solid #b9cebe;background:#fff;color:#175d43;padding:10px 15px;border-radius:6px;cursor:pointer}button[aria-pressed=true]{background:#175d43;color:white}button:focus-visible{outline:3px solid #20a464;outline-offset:3px}a{color:inherit;font-size:12px}code{font-size:12px}
+</style></head>
+<body><main><a href="../START-HERE.html">← 返回设计包</a><h1>让表情，跟随真实任务。</h1><p id="runtime-note">无依赖 Web Component 接入示例。</p>
+<section><div class="row"><clovers-logo id="state-logo" expression="default" label="Clovers Agent"><img src="../01-core/clovers-default.svg" alt="Clovers Agent"></clovers-logo><div><h2>状态切换</h2><p id="status" role="status">随时回应</p><div class="row" style="gap:8px"><button data-expression="default" aria-pressed="true">默认</button><button data-expression="coding" aria-pressed="false">Coding &gt;_</button><button data-expression="thinking" aria-pressed="false">思考 &gt;&lt;</button></div></div></div></section>
+<section class="dark"><div class="row"><clovers-logo expression="thinking" label="Clovers Agent 努力思考"><img src="../02-icons/svg/thinking-reverse.svg" alt="Clovers Agent 努力思考"></clovers-logo><div><h2>深色背景</h2><p>通过 CSS 变量指定主体与眼睛颜色。</p><code>--clovers-body: #C9EFBE;<br>--clovers-eyes: #FFFFFF;</code></div></div></section>
+<section><div class="row"><picture><source media="(prefers-reduced-motion: reduce)" srcset="../01-core/clovers-default.svg"><img src="../05-animation/previews/clovers-loop.webp" width="160" height="160" alt="Clovers Agent 表情演示"></picture><div><h2>减少动态效果</h2><p>系统偏好开启时，用静态 Logo 替换栅格动画。</p></div></div></section></main>
+<script>
+const labels={default:'随时回应',coding:'正在编写',thinking:'正在认真思考'};
+document.querySelectorAll('button[data-expression]').forEach(button=>button.addEventListener('click',()=>{
+ const expression=button.dataset.expression,logo=document.getElementById('state-logo');
+ logo.setAttribute('expression',expression);logo.setAttribute('label',`Clovers Agent ${labels[expression]}`);
+ const fallback=logo.querySelector('img');if(fallback){fallback.src=`../01-core/clovers-${expression}.svg`;fallback.alt=`Clovers Agent ${labels[expression]}`;}
+ document.getElementById('status').textContent=labels[expression];
+ document.querySelectorAll('button[data-expression]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+}));
+if(location.protocol==='file:'){document.getElementById('runtime-note').textContent='当前为本地文件预览：显示静态后备图。通过 HTTP 服务打开可启用 Web Component。';}
+else{import('./clovers-logo.js?v=2.0.0').catch(error=>{console.error('Clovers component:',error.message);document.getElementById('runtime-note').textContent='组件加载失败，当前显示静态后备图。';});}
+</script></body></html>
