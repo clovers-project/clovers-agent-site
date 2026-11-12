@@ -1,0 +1,77 @@
+[
+  {
+    "title": "快速开始：uv 与依赖安装",
+    "keywords": "uv UV PyPI Python 3.12 安装 init add sync lock run console 环境 模型",
+    "url": "quickstart.html#prepare"
+  },
+  {
+    "title": "创建宿主入口 bot.py",
+    "keywords": "clovers_client.console Client 启动 Python",
+    "url": "quickstart.html#entry"
+  },
+  {
+    "title": "配置模型与消息准入",
+    "keywords": "clovers.toml api key url plugins check console_mode",
+    "url": "quickstart.html#configure"
+  },
+  {
+    "title": "启动并发送第一条消息",
+    "keywords": "uv run 11000 网页控制台 @ 昵称 回复 bot.py",
+    "url": "quickstart.html#run"
+  },
+  {
+    "title": "Agent 与宿主",
+    "keywords": "后端 前端 架构 宿主 console",
+    "url": "docs.html#overview"
+  },
+  {
+    "title": "模型与配置",
+    "keywords": "模型 API Chat Completions vision 流式 summary",
+    "url": "docs.html#models"
+  },
+  {
+    "title": "准入与平台接入",
+    "keywords": "whitelist blacklist console_mode to_me 群号 白名单 黑名单 适配器",
+    "url": "docs.html#platforms"
+  },
+  {
+    "title": "会话与任务",
+    "keywords": "会话 路由 旁路 主动插话 并发 任务",
+    "url": "docs.html#sessions"
+  },
+  {
+    "title": "记忆与人设",
+    "keywords": "记忆 摘要 recorder.jsonl 人设 STYLE.md 数据 路径",
+    "url": "docs.html#memory"
+  },
+  {
+    "title": "工具集与工作区",
+    "keywords": "工具集 Docker shell subagent 工作区 搜索 上传 文件",
+    "url": "docs.html#toolkit"
+  },
+  {
+    "title": "生活化扩展",
+    "keywords": "历史 画像 贴纸 语音 TTS life extensions",
+    "url": "docs.html#life"
+  },
+  {
+    "title": "插件与 Skill",
+    "keywords": "Python TOOLS Skill 脚本 扩展 plugin_dirs skill_dirs",
+    "url": "docs.html#extensions"
+  },
+  {
+    "title": "常见问题",
+    "keywords": "不回复 错误 失败 日志 page 配置 模型 排查",
+    "url": "docs.html#troubleshooting"
+  },
+  {
+    "title": "文档来源",
+    "keywords": "上游 来源 版本 文档",
+    "url": "docs.html#sources"
+  },
+  {
+    "title": "相关项目",
+    "keywords": "Clovers 客户端 NoneBot 相关项目",
+    "url": "docs.html#related"
+  }
+]

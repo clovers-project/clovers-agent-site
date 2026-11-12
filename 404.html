@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/clovers-agent-site/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="返回 Clovers Agent 首页或使用文档。" />
+    <meta name="theme-color" content="#175D43" />
+    <meta property="og:title" content="页面未找到 · Clovers Agent" />
+    <meta property="og:description" content="返回 Clovers Agent 首页或使用文档。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://clovers-project.github.io/clovers-agent-site/assets/brand/og.png" />
+    <title>页面未找到 · Clovers Agent</title>
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+    <link rel="icon" sizes="any" href="assets/brand/favicon.ico" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script src="assets/site.js" defer></script>
+  </head>
+  <body data-page="404">
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Clovers Agent 首页"
+          ><img src="assets/brand/wordmark.svg" alt="clovers agent" width="220" height="57"
+        /></a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="./">介绍</a><a href="quickstart.html">快速开始</a><a href="docs.html">文档</a>
+        </nav>
+        <div class="header-actions">
+          <button class="search-open" type="button" aria-label="搜索文档">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m16 16 4.5 4.5" /></svg
+            ><span>搜索文档</span><kbd>/</kbd></button
+          ><a class="github-link" href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
+            >GitHub <span aria-hidden="true">↗</span></a
+          ><button class="menu-toggle" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="mobile-nav">
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="移动端导航" hidden>
+        <a href="./">介绍</a><a href="quickstart.html">快速开始</a><a href="docs.html">文档</a
+        ><a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+    <main id="main" class="container not-found">
+      <img src="assets/brand/thinking.svg" alt="" width="160" height="160" /><span class="eyebrow">404 / PAGE NOT FOUND</span>
+      <h1>这片叶子，暂时没找到。</h1>
+      <p>可以回到首页，或从文档继续探索。</p>
+      <div class="hero-buttons">
+        <a class="button button-primary" href="./">返回首页 ↗</a><a class="button button-plain" href="docs.html">阅读文档 →</a>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a class="footer-brand" href="./"><img src="assets/brand/default.svg" width="36" height="36" alt="" /><span>clovers agent</span></a>
+        <p>让对话生长，让能力连接。</p>
+        <div>
+          <a href="docs.html#sources">文档来源</a><a href="docs.html#related">相关项目</a
+          ><a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
+            >MIT · 开源 <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </div>
+      <div class="footer-bottom"><span>Built for the Clovers ecosystem.</span><span>文档核对于 2026.11.12</span></div>
+    </footer>
+    <dialog id="search-dialog" aria-labelledby="search-title">
+      <form method="dialog" class="search-heading">
+        <label id="search-title" for="search-input">搜索文档</label><button class="dialog-close" aria-label="关闭搜索">Esc</button>
+      </form>
+      <input id="search-input" type="search" placeholder="搜索配置、工具、平台接入…" autocomplete="off" />
+      <p id="search-count" class="search-count" aria-live="polite"></p>
+      <div id="search-results"></div>
+      <p class="search-hint">输入关键词查找 · Esc 关闭</p>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

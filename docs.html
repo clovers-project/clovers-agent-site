@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Clovers Agent 核心配置、平台接入、会话记忆、工具集、生活化扩展与常见问题。" />
+    <meta name="theme-color" content="#175D43" />
+    <meta property="og:title" content="使用文档 · Clovers Agent" />
+    <meta property="og:description" content="Clovers Agent 核心配置、平台接入、会话记忆、工具集、生活化扩展与常见问题。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://clovers-project.github.io/clovers-agent-site/assets/brand/og.png" />
+    <title>使用文档 · Clovers Agent</title>
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+    <link rel="icon" sizes="any" href="assets/brand/favicon.ico" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script src="assets/site.js" defer></script>
+  </head>
+  <body data-page="docs">
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Clovers Agent 首页"
+          ><img src="assets/brand/wordmark.svg" alt="clovers agent" width="220" height="57"
+        /></a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="./">介绍</a><a href="quickstart.html">快速开始</a><a href="docs.html" aria-current="page">文档</a>
+        </nav>
+        <div class="header-actions">
+          <button class="search-open" type="button" aria-label="搜索文档">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m16 16 4.5 4.5" /></svg
+            ><span>搜索文档</span><kbd>/</kbd></button
+          ><a class="github-link" href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
+            >GitHub <span aria-hidden="true">↗</span></a
+          ><button class="menu-toggle" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="mobile-nav">
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="移动端导航" hidden>
+        <a href="./">介绍</a><a href="quickstart.html">快速开始</a><a href="docs.html" aria-current="page">文档</a
+        ><a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+    <main id="main" class="container docs-layout">
+      <aside class="docs-sidebar">
+        <div class="sidebar-heading">使用文档</div>
+        <nav aria-label="本页目录">
+          <a href="#overview"><span>01</span>Agent 与宿主</a><a href="#models"><span>02</span>模型与配置</a
+          ><a href="#platforms"><span>03</span>准入与平台接入</a><a href="#sessions"><span>04</span>会话与任务</a
+          ><a href="#memory"><span>05</span>记忆与人设</a><a href="#toolkit"><span>06</span>工具集与工作区</a
+          ><a href="#life"><span>07</span>生活化扩展</a><a href="#extensions"><span>08</span>插件与 Skill</a
+          ><a href="#troubleshooting"><span>09</span>常见问题</a><a href="#sources"><span>10</span>文档来源</a
+          ><a href="#related"><span>11</span>相关项目</a>
+        </nav>
+        <a class="sidebar-bottom" href="quickstart.html">先运行一个示例 <span aria-hidden="true">↗</span></a>
+      </aside>
+      <article class="doc-content">
+        <header class="doc-header">
+          <span class="eyebrow">DOCUMENTATION / 使用文档</span>
+          <h1>让能力，连接起来。</h1>
+          <p>从模型配置到平台接入，理解核心的工作方式，并按需添加工具、记忆与扩展。</p>
+          <div class="doc-pills"><span>Python 3.12+</span><span>面向 Agent 使用者</span></div>
+        </header>
+        <section class="doc-section" id="overview">
+          <h2>先理解 Agent 与宿主</h2>
+          <p>
+            Clovers Agent 是运行在 Clovers 宿主中的异步 Agent
+            后端。它接收统一事件，组织会话、路由与模型工具循环；平台连接、界面、消息呈现与能力调用由宿主和适配器负责。
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">组成</th>
+                  <th scope="col">负责什么</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Clovers 宿主 / 客户端</td>
+                  <td>启动生命周期、连接平台、加载 Clovers 插件。console 是本文的示例宿主。</td>
+                </tr>
+                <tr>
+                  <td>平台适配器</td>
+                  <td>把平台消息转为事件属性，把发送与调用请求转为具体平台操作。</td>
+                </tr>
+                <tr>
+                  <td><code>clovers_agent</code></td>
+                  <td>消息准入、会话、场景路由、模型调用、工具循环、图片与记忆压缩。</td>
+                </tr>
+                <tr>
+                  <td>工具插件 / Skill</td>
+                  <td>向核心添加具体工具、场景、工作流、脚本和参考资料。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>本网站是介绍与使用文档。品牌图形和表情是视觉素材，不表示 Agent 提供了一套固定 UI、实时状态面板或统一前端协议。</p>
+          <p class="source-line">
+            原始说明：<a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
+              >Agent 仓库文档 <span aria-hidden="true">↗</span></a
+            >
+          </p>
+        </section>
+        <section class="doc-section" id="models">
+          <h2>模型与核心配置</h2>
+          <p>
+            核心配置位于 <code>[clovers_agent]</code>，由宿主配置系统读取。console 示例使用当前工作目录的
+            <code>clovers.toml</code>；其他宿主的配置位置由其实现决定。完整可运行配置见<a href="quickstart.html#configure">快速开始</a>。
+          </p>
+          <div class="code-block">
+            <div class="code-label">
+              <span>模型配置 · 合并到现有 TOML</span
+              ><button class="copy-button" type="button" aria-label="复制 模型配置 · 合并到现有 TOML">复制</button>
+            </div>
+            <pre><code>[clovers_agent.api]
+url = &quot;https://your-provider.example/v1&quot;
+model = &quot;your-model&quot;
+api_key = &quot;your-api-key&quot;
+extra_body = {}
+
+# 可选：摘要使用独立模型
+[clovers_agent.apis.summary]
+url = &quot;https://your-provider.example/v1&quot;
+model = &quot;your-summary-model&quot;
+api_key = &quot;your-api-key&quot;</code></pre>
+          </div>
+          <p>
+            默认模型必须支持 function tool calling。请求使用 Bearer 鉴权，目标地址为 <code>url</code> 去掉末尾斜杠后追加
+            <code>/chat/completions</code>。当前解析完整 JSON 响应，不支持模型 token 流式响应。
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">字段 / 接入点</th>
+                  <th scope="col">用途</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>api</code></td>
+                  <td>必填的默认模型配置。</td>
+                </tr>
+                <tr>
+                  <td><code>apis.router</code> / <code>apis.on_chat</code></td>
+                  <td>场景选择 / 普通聊天；缺失时回退默认模型。</td>
+                </tr>
+                <tr>
+                  <td><code>apis.chime_in</code> / <code>apis.summary</code></td>
+                  <td>主动插话 / 历史摘要。</td>
+                </tr>
+                <tr>
+                  <td><code>apis.on_task</code></td>
+                  <td>官方工具集工作区场景，路由入口实际名为 on_workspace。</td>
+                </tr>
+                <tr>
+                  <td><code>vision</code></td>
+                  <td>可在模型配置中指定独立视觉接入点，先把图片转写为文字。</td>
+                </tr>
+                <tr>
+                  <td><code>extra_body</code></td>
+                  <td>附加请求体，会合并并可覆盖 model、messages 等字段。</td>
+                </tr>
+                <tr>
+                  <td><code>sentence_model</code></td>
+                  <td>默认 BAAI/bge-small-zh-v1.5，用于句向量。</td>
+                </tr>
+                <tr>
+                  <td><code>sentence_model_cache</code></td>
+                  <td>句向量缓存路径，与数据根目录 path 分开配置。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-line">
+            <a
+              href="https://github.com/clovers-project/clovers-agent/blob/master/clovers-agent/README.md#配置"
+              target="_blank"
+              rel="noopener noreferrer"
+              >完整核心配置文档 <span aria-hidden="true">↗</span></a
+            >
+          </p>
+        </section>
+        <section class="doc-section" id="platforms">
+          <h2>消息准入与平台接入</h2>
+          <p>
+            从 console 迁移到聊天平台时，在所选宿主环境安装 Agent，再让宿主加载
+            <code>clovers_agent</code>。替换宿主入口、平台连接与适配器配置，并按实际群号设置准入。
+          </p>
+          <div class="code-block">
+            <div class="code-label">
+              <span>群聊准入 · 替换原 check 段</span
+              ><button class="copy-button" type="button" aria-label="复制 群聊准入 · 替换原 check 段">复制</button>
+            </div>
+            <pre><code>[clovers_agent.check]
+whitelist = [&quot;your-group-id&quot;]
+blacklist = []
+console_mode = false</code></pre>
+          </div>
+          <p>
+            准入依次采用第一个满足的模式：<strong>非空白名单 → 非空黑名单 → console_mode → 拒绝全部</strong
+            >。群号必须是字符串；白名单与黑名单模式都要求群聊，不接收私聊。不要同时配置多个模式并期待叠加。
+          </p>
+          <h3>接入前核对这些能力</h3>
+          <ul>
+            <li>基础事件：用户 ID、昵称、群组 ID、@ 列表、<code>to_me</code> 与图片列表。</li>
+            <li>回复能力：文本、图片、文件，以及所选扩展需要的发送方法。</li>
+            <li>额外能力：引用上下文、群成员查询、指定私聊或跨群发送，是否由该适配器实现。</li>
+          </ul>
+          <aside class="note">
+            <strong>开放协议不代表所有平台都实现了同一能力</strong>
+            <p>
+              以适配器的实际支持为准。例如 console 尚未实现 flat_context 与群成员查询，语音 /
+              视频通常以下载链接发送，定向私聊仅允许当前事件发送者。页面样式、状态展示和交互方式也由宿主决定。
+            </p>
+          </aside>
+          <p>更多宿主与适配器资料见文末<a href="#related">相关项目</a>；本文不展开与 Agent 使用无关的框架实现细节。</p>
+        </section>
+        <section class="doc-section" id="sessions">
+          <h2>会话、路由与任务</h2>
+          <p>
+            群聊使用 <code>group_id</code> 隔离会话；私聊使用 <code>private-&lt;user_id&gt;</code>。准入通过后，Agent
+            先记录短期消息，再根据是否为定向消息、会话是否忙碌选择处理路径。
+          </p>
+          <ol class="process-list">
+            <li>
+              <strong>收到定向消息</strong>
+              <p>@ 机器人等定向输入进入正式处理。存在多个场景时由路由模型选择，路由异常时回退普通聊天。</p>
+            </li>
+            <li>
+              <strong>加载场景与工具</strong>
+              <p>准备上下文，按需加载分类工具；同一次模型响应内的多个工具调用并发执行。</p>
+            </li>
+            <li>
+              <strong>任务中继续交流</strong>
+              <p>主任务运行时，新的定向消息可由旁路回复，或向主任务注入补充说明。</p>
+            </li>
+            <li>
+              <strong>回复并记录</strong>
+              <p>结束调用链后保存完成轮次。普通群聊在会话空闲、无其他 @ 且冷却结束等条件下可触发主动插话。</p>
+            </li>
+          </ol>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">常用配置</th>
+                  <th scope="col">默认值 / 含义</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>max_call_depth</code></td>
+                  <td>40；一条调用链最多请求模型的次数，不是工具调用总数。</td>
+                </tr>
+                <tr>
+                  <td><code>chime_in_cooldown</code></td>
+                  <td>3600 秒；主动插话冷却。</td>
+                </tr>
+                <tr>
+                  <td><code>session.silence_size</code></td>
+                  <td>10；短期消息窗口容量。</td>
+                </tr>
+                <tr>
+                  <td><code>session.silence_timeout</code></td>
+                  <td>3600 秒；短期消息保留时间。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="doc-section" id="memory">
+          <h2>记忆、数据与人设</h2>
+          <p>
+            核心记录完成轮次，并在轮数、时间或话题切换条件满足时生成 Markdown 摘要。默认数据根目录为
+            <code>./data/CloversAgent/</code>，相对路径按宿主启动时的工作目录解释。
+          </p>
+          <div class="code-block">
+            <div class="code-label">
+              <span>常用数据路径 · 部分目录按需产生</span
+              ><button class="copy-button" type="button" aria-label="复制 常用数据路径 · 部分目录按需产生">复制</button>
+            </div>
+            <pre><code>data/CloversAgent/
+├── sessions/
+│   └── &lt;session_id&gt;/
+│       ├── recorder.jsonl
+│       └── histories/
+├── prompts/
+│   ├── STYLE.md
+│   └── CHAT.md
+├── usages/
+└── workspace/</code></pre>
+          </div>
+          <p>
+            <code>recorder.jsonl</code>
+            是可清理的上下文记录，不是永久聊天存档。摘要压缩会删除该记录并留下摘要，每日维护也会清理过期会话的记录；短期消息、图片映射和路由窗口只存在内存。
+          </p>
+          <p>核心不会自动检索旧摘要并读回上下文；需要历史召回时启用<a href="#life">生活化扩展</a>。图片映射重启后无法凭旧标签恢复。</p>
+          <h3>调整人设与回复风格</h3>
+          <p>
+            在数据目录的 <code>prompts/STYLE.md</code> 写人设与风格，<code>CHAT.md</code> 写普通聊天规则；也可配置
+            <code>prompts</code> 对应字段。非空覆盖文件优先。文件不会自动创建，修改后重启宿主生效。
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">会话配置</th>
+                  <th scope="col">默认值 / 含义</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>session.memory_size</code></td>
+                  <td>240；完成轮数严格大于此阈值时尝试摘要。</td>
+                </tr>
+                <tr>
+                  <td><code>session.memory_timeout</code></td>
+                  <td>86400 秒；记忆超时与过期会话维护判断。</td>
+                </tr>
+                <tr>
+                  <td><code>session.decouple_length</code></td>
+                  <td>3000 字符；达到后尝试话题检测，不是 token 上限。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="doc-section" id="toolkit">
+          <h2>可选工具集与工作区</h2>
+          <p>
+            <code>clovers-agent-toolkit</code> 提供工作区、联网搜索、网页正文提取和开发调试。在快速开始创建的
+            <code>clovers-bot</code> 项目目录中，从 PyPI 添加依赖，再加入核心的工具插件列表。
+          </p>
+          <div class="code-block">
+            <div class="code-label">
+              <span>终端 · 在宿主项目目录执行</span
+              ><button class="copy-button" type="button" aria-label="复制 终端 · 在宿主项目目录执行">复制</button>
+            </div>
+            <pre><code>uv add clovers-agent-toolkit</code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-label">
+              <span>配置片段 · 合并并替换已有同名段，不要重复声明</span
+              ><button class="copy-button" type="button" aria-label="复制 配置片段 · 合并并替换已有同名段，不要重复声明">复制</button>
+            </div>
+            <pre><code>[clovers_agent]
+plugins = [&quot;clovers_agent_toolkit&quot;]
+plugin_dirs = []
+skill_dirs = []
+
+[clovers_agent_toolkit]
+use_categories = [&quot;workspace&quot;, &quot;network&quot;]
+
+[clovers_agent_toolkit.workspace]
+use_shell = false
+
+[clovers_agent_toolkit.network]
+deepseek_search_key = &quot;your-search-api-key&quot;</code></pre>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">能力</th>
+                  <th scope="col">使用条件与边界</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>文件工作区</td>
+                  <td>默认无需 Docker，提供 fetch_url、ls、read_file、write_file；工作区可上传文件，依赖平台文件发送。</td>
+                </tr>
+                <tr>
+                  <td>Docker 命令与子代理</td>
+                  <td>设置 workspace.use_shell=true，且 Docker 初始化成功后注入 execute_command、subagent。失败时回退文件模式。</td>
+                </tr>
+                <tr>
+                  <td>联网搜索</td>
+                  <td>需要填写 network.deepseek_search_key；搜索结果是摘要，网页正文由 web_extractor 提取。</td>
+                </tr>
+                <tr>
+                  <td>网页提取</td>
+                  <td>HTTP 下载并提取正文，不提供浏览器 JS 渲染或登录流程。</td>
+                </tr>
+                <tr>
+                  <td>开发调试</td>
+                  <td>debug_utils 默认关闭，确有需要时再加入 use_categories。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            保存配置后，用
+            <code>uv run bot.py</code>
+            重启宿主。子代理异步运行；主调用链空闲且已登记任务完成后，由唤醒轮次处理结果。它依赖当前进程，不是持久化任务队列。文件工具不能视为严格的宿主文件沙箱，启用前应按宿主的实际权限安排工作区。
+          </p>
+          <p class="source-line">
+            <a
+              href="https://github.com/clovers-project/clovers-agent/blob/master/clovers-agent-toolkit/README.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >完整工具集文档 <span aria-hidden="true">↗</span></a
+            >
+          </p>
+        </section>
+        <section class="doc-section" id="life">
+          <h2>生活化扩展</h2>
+          <div class="doc-extension-heading">
+            <img src="assets/brand/thinking.svg" alt="" width="72" height="72" />
+            <p><strong>clovers-agent-life-extensions</strong><br />在普通聊天中加入历史召回、用户画像与更多表达工具。</p>
+          </div>
+          <p>
+            扩展已发布到 PyPI，需要 Python 3.12+ 与
+            <code>clovers-agent&gt;=0.3.8</code>。先完成核心模型与准入配置，再在同一个宿主项目目录中添加依赖，并交给核心加载。
+          </p>
+          <div class="code-block">
+            <div class="code-label">
+              <span>终端 · 在宿主项目目录执行</span
+              ><button class="copy-button" type="button" aria-label="复制 终端 · 在宿主项目目录执行">复制</button>
+            </div>
+            <pre><code>uv add clovers-agent-life-extensions</code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-label">
+              <span>替换现有 clovers_agent 段 · 仅保留已安装的扩展</span
+              ><button class="copy-button" type="button" aria-label="复制 替换现有 clovers_agent 段 · 仅保留已安装的扩展">复制</button>
+            </div>
+            <pre><code>[clovers_agent]
+plugins = [
+  &quot;clovers_agent_toolkit&quot;,
+  &quot;clovers_agent_life_extensions&quot;,
+]
+plugin_dirs = []
+skill_dirs = []</code></pre>
+          </div>
+          <p>
+            上述示例同时启用工具集与生活化扩展；只安装了生活化扩展时移除工具集模块名。保存配置后，用 <code>uv run bot.py</code> 重启宿主。
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">能力</th>
+                  <th scope="col">实际行为</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>历史召回</td>
+                  <td>检索核心生成的 Markdown 摘要，混合关键词与语义排序，按需展开正文；最新的一条暂留摘要不会立即参与召回。</td>
+                </tr>
+                <tr>
+                  <td>用户画像</td>
+                  <td>按用户 ID 维护称呼、标签、偏好、印象与星级记忆；画像跨会话共用，历史按会话隔离。</td>
+                </tr>
+                <tr>
+                  <td>贴纸</td>
+                  <td>收藏当前消息图片，按意图筛选并发送。依赖图片资源和适配器。</td>
+                </tr>
+                <tr>
+                  <td>语音</td>
+                  <td>配置 TTS 与参考音频后注册 send_voice，发送能力由适配器提供。</td>
+                </tr>
+                <tr>
+                  <td>定向消息</td>
+                  <td>从群聊私聊当前用户，或向其他指定群发送文字。工具返回 OK 表示提交后台发送。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>可选语音配置</h3>
+          <p>
+            配置 <code>clovers_agent_life_extensions.chat.mimo_tts</code> 的
+            <code>url</code>、<code>model</code>、<code>api_key</code>，并在核心数据目录
+            <code>chat_utils/ref_voice.wav</code> 放参考音频。音频可用且密钥非空才会注册语音工具，修改后重启。
+          </p>
+          <p>
+            历史召回、画像注入和这些工具绑定在
+            <code>on_chat</code>
+            场景。用户拉黑检查在路由前执行，主动插话与旁路回复不经过同一检查。画像与历史以本地明文保存，内容可能进入模型上下文，应按需要备份。
+          </p>
+          <p class="source-line">
+            <a href="https://github.com/clovers-project/clovers-agent-life-extensions" target="_blank" rel="noopener noreferrer"
+              >生活化扩展完整文档与配置 <span aria-hidden="true">↗</span></a
+            >
+          </p>
+        </section>
+        <section class="doc-section" id="extensions">
+          <h2>编写插件与 Skill</h2>
+          <p>
+            需要访问宿主对象或第三方库时使用 Python 工具插件；需要组织场景提示、工作流、脚本与参考资料时使用
+            Skill。两者由核心加载，区别于宿主加载核心本身。
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">扩展方式</th>
+                  <th scope="col">加载配置</th>
+                  <th scope="col">适用场景</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>已安装的 Python 工具模块</td>
+                  <td><code>clovers_agent.plugins</code></td>
+                  <td>导出 TOOLS = AgentTools() 的工具插件。</td>
+                </tr>
+                <tr>
+                  <td>本地 Python 工具目录</td>
+                  <td><code>clovers_agent.plugin_dirs</code></td>
+                  <td>宿主环境下的本地工具开发。</td>
+                </tr>
+                <tr>
+                  <td>Markdown Skill 根目录</td>
+                  <td><code>clovers_agent.skill_dirs</code></td>
+                  <td>扫描直接子项 .md 或带 SKILL.md 的目录。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="code-block">
+            <div class="code-label">
+              <span>自定义扩展 · 按需合并</span
+              ><button class="copy-button" type="button" aria-label="复制 自定义扩展 · 按需合并">复制</button>
+            </div>
+            <pre><code>[clovers_agent]
+plugins = []
+plugin_dirs = [&quot;./my_agent_tools&quot;]
+skill_dirs = [&quot;./my_agent_skills&quot;]</code></pre>
+          </div>
+          <p>
+            Skill 使用 UTF-8 Markdown 与 YAML front matter，<code>name</code> 和 <code>description</code> 必填。Python 插件的注册接口与
+            Skill 的参数结构不同，编写时参考各自文档。
+          </p>
+          <p>
+            Python 工具、Skill Python
+            与脚本拥有宿主权限；只加载你需要且信任的内容。仓库中的测试工具与风格示例并非必需功能，快速开始已清空默认扫描目录。
+          </p>
+          <div class="inline-links">
+            <a
+              href="https://github.com/clovers-project/clovers-agent/blob/master/AgentTools/README.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Python 插件开发 <span aria-hidden="true">↗</span></a
+            ><a
+              href="https://github.com/clovers-project/clovers-agent/blob/master/AgentSkills/README.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Skill 编写文档 <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </section>
+        <section class="doc-section" id="troubleshooting">
+          <h2>常见问题</h2>
+          <details>
+            <summary>启动了，但没有回复？</summary>
+            <div>
+              <p>
+                先确认宿主加载了 clovers_agent，api 配置有效，check 规则放行。群号使用字符串；用 @
+                机器人或昵称前缀发送定向消息。console_mode 仅放行消息，不会把所有消息都变成定向输入。
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>启动卡在模型加载？</summary>
+            <div>
+              <p>
+                核对句向量模型的网络、缓存与路径。首次启动会加载 PyTorch / sentence-transformers 模型，准备本地模型后可调整 sentence_model
+                与 sentence_model_cache。
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>没有自动生成 clovers.toml？</summary>
+            <div><p>console 的最小入口不会保存配置。手动创建快速开始中的文件，并始终从包含该文件的工作目录启动。修改配置后重启。</p></div>
+          </details>
+          <details>
+            <summary>缺少 FastAPI / uvicorn 或 console/page？</summary>
+            <div>
+              <p>
+                在宿主项目目录执行 uv add "clovers-client[console]"，再用 uv run bot.py 启动，确保使用同一环境。console/page
+                缺失则是配套已构建网页资源缺失，检查安装产物是否包含它们；安装 Python 依赖不会替你构建网页。
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>安装了扩展，为什么工具没出现？</summary>
+            <div>
+              <p>
+                安装后还需要加入 clovers_agent.plugins 并重启。生活化扩展工具绑定在普通聊天场景，语音还需要有效参考音频和 TTS
+                配置。分类工具可能需要由模型按需加载。
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>重启后为什么记忆或旧图片不见了？</summary>
+            <div>
+              <p>短期窗口与图片映射只存内存；完成轮次可能已压缩为摘要或被每日维护清理。核心没有自动历史检索，长期召回需生活化扩展。</p>
+            </div>
+          </details>
+          <details>
+            <summary>文件、语音或跨群消息发送失败？</summary>
+            <div>
+              <p>
+                核对平台适配器是否实现对应发送方法，并查看后台日志。console 首次发送本地文件前需创建
+                data/CloversConsole/stores_dir/file/；定向私聊仅支持当前事件发送者。
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>模型请求失败，应查看什么？</summary>
+            <div>
+              <p>
+                查看宿主日志及会话目录中的 payload_*.json。核对 API
+                根地址、密钥、模型的工具调用支持与响应格式。失败现场可能含完整对话和工具内容，分享前先检查。
+              </p>
+            </div>
+          </details>
+        </section>
+        <section class="doc-section" id="sources">
+          <h2>文档来源</h2>
+          <p>
+            本文依据下列项目文档整理，核对日期为 <strong>2026 年 11 月 12 日</strong>。对应文档中的源码版本为核心 0.3.9、工具集
+            0.3.6、生活化扩展 0.3.5；客户端使用说明基于 0.3.8。具体兼容范围以所安装版本的上游说明为准。
+          </p>
+          <div class="source-links">
+            <a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
+              >Clovers Agent · 安装与运行机制 <span aria-hidden="true">↗</span></a
+            ><a href="https://github.com/clovers-project/clovers-agent-life-extensions" target="_blank" rel="noopener noreferrer"
+              >Life Extensions · 历史、画像与表达 <span aria-hidden="true">↗</span></a
+            ><a
+              href="https://github.com/clovers-project/clovers-project.github.io/blob/master/docs/README.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Clovers · 框架文档 <span aria-hidden="true">↗</span></a
+            ><a
+              href="https://github.com/clovers-project/clovers-project.github.io/blob/master/docs/clovers-client.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >clovers-client · 宿主与适配器 <span aria-hidden="true">↗</span></a
+            ><a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener noreferrer"
+              >uv · 安装指南 <span aria-hidden="true">↗</span></a
+            ><a href="https://docs.astral.sh/uv/guides/projects/" target="_blank" rel="noopener noreferrer"
+              >uv · 项目与依赖管理 <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <p>框架指令插件开发、通用响应器实现与其他业务插件不属于 Agent 的使用步骤，因此未展开；如需定制宿主，可继续查阅相关项目。</p>
+        </section>
+        <section class="doc-section" id="related">
+          <h2>相关项目</h2>
+          <p>按需了解 Clovers 生态。它们各自承担框架、宿主或接入工作，不是使用 Agent 必须全部安装的组件。</p>
+          <div class="related-grid">
+            <a href="https://github.com/clovers-project/clovers" target="_blank" rel="noopener noreferrer"
+              ><strong>Clovers <span aria-hidden="true">↗</span></strong>
+              <p>异步指令与响应插件框架。</p></a
+            ><a href="https://github.com/clovers-project/clovers-client" target="_blank" rel="noopener noreferrer"
+              ><strong>clovers-client <span aria-hidden="true">↗</span></strong>
+              <p>官方客户端、事件约定与 console 宿主。</p></a
+            ><a href="https://clovers-project.github.io/#/nonebot-plugin-clovers" target="_blank" rel="noopener noreferrer"
+              ><strong>NoneBot Clovers Client <span aria-hidden="true">↗</span></strong>
+              <p>在 NoneBot 项目中运行 Clovers 的接入方案。</p></a
+            ><a href="https://github.com/clovers-project/clovers-agent-life-extensions" target="_blank" rel="noopener noreferrer"
+              ><strong>Life Extensions <span aria-hidden="true">↗</span></strong>
+              <p>为 Agent 普通聊天添加历史、画像与表达工具。</p></a
+            >
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a class="footer-brand" href="./"><img src="assets/brand/default.svg" width="36" height="36" alt="" /><span>clovers agent</span></a>
+        <p>让对话生长，让能力连接。</p>
+        <div>
+          <a href="docs.html#sources">文档来源</a><a href="docs.html#related">相关项目</a
+          ><a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
+            >MIT · 开源 <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </div>
+      <div class="footer-bottom"><span>Built for the Clovers ecosystem.</span><span>文档核对于 2026.11.12</span></div>
+    </footer>
+    <dialog id="search-dialog" aria-labelledby="search-title">
+      <form method="dialog" class="search-heading">
+        <label id="search-title" for="search-input">搜索文档</label><button class="dialog-close" aria-label="关闭搜索">Esc</button>
+      </form>
+      <input id="search-input" type="search" placeholder="搜索配置、工具、平台接入…" autocomplete="off" />
+      <p id="search-count" class="search-count" aria-live="polite"></p>
+      <div id="search-results"></div>
+      <p class="search-hint">输入关键词查找 · Esc 关闭</p>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
