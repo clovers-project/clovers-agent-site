@@ -1,8 +1,0 @@
-{
-  "name": "clovers-agent-site",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "node scripts/build.mjs"
-  }
-}
