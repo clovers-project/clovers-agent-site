@@ -441,49 +441,6 @@ skill_dirs = []</code></pre>
           <p>
             上述示例同时启用工具集与生活化扩展；只安装了生活化扩展时移除工具集模块名。保存配置后，用 <code>uv run bot.py</code> 重启宿主。
           </p>
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">能力</th>
-                  <th scope="col">实际行为</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>历史召回</td>
-                  <td>检索核心生成的 Markdown 摘要，混合关键词与语义排序，按需展开正文；最新的一条暂留摘要不会立即参与召回。</td>
-                </tr>
-                <tr>
-                  <td>用户画像</td>
-                  <td>按用户 ID 维护称呼、标签、偏好、印象与星级记忆；画像跨会话共用，历史按会话隔离。</td>
-                </tr>
-                <tr>
-                  <td>贴纸</td>
-                  <td>收藏当前消息图片，按意图筛选并发送。依赖图片资源和适配器。</td>
-                </tr>
-                <tr>
-                  <td>语音</td>
-                  <td>配置 TTS 与参考音频后注册 send_voice，发送能力由适配器提供。</td>
-                </tr>
-                <tr>
-                  <td>定向消息</td>
-                  <td>从群聊私聊当前用户，或向其他指定群发送文字。工具返回 OK 表示提交后台发送。</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <h3>可选语音配置</h3>
-          <p>
-            配置 <code>clovers_agent_life_extensions.chat.mimo_tts</code> 的
-            <code>url</code>、<code>model</code>、<code>api_key</code>，并在核心数据目录
-            <code>chat_utils/ref_voice.wav</code> 放参考音频。音频可用且密钥非空才会注册语音工具，修改后重启。
-          </p>
-          <p>
-            历史召回、画像注入和这些工具绑定在
-            <code>on_chat</code>
-            场景。用户拉黑检查在路由前执行，主动插话与旁路回复不经过同一检查。画像与历史以本地明文保存，内容可能进入模型上下文，应按需要备份。
-          </p>
           <p class="source-line">
             <a href="https://github.com/clovers-project/clovers-agent-life-extensions" target="_blank" rel="noopener noreferrer"
               >生活化扩展完整文档与配置 <span aria-hidden="true">↗</span></a
@@ -583,19 +540,13 @@ skill_dirs = [&quot;./my_agent_skills&quot;]</code></pre>
           <details>
             <summary>缺少 FastAPI / uvicorn 或 console/page？</summary>
             <div>
-              <p>
-                在宿主项目目录执行 uv add "clovers-client[console]"，再用 uv run bot.py 启动，确保使用同一环境。console/page
-                缺失则是配套已构建网页资源缺失，检查安装产物是否包含它们；安装 Python 依赖不会替你构建网页。
-              </p>
+              <p>在宿主项目目录执行 uv add "clovers-client[console]"，再用 uv run bot.py 启动，确保使用同一环境。</p>
             </div>
           </details>
           <details>
             <summary>安装了扩展，为什么工具没出现？</summary>
             <div>
-              <p>
-                安装后还需要加入 clovers_agent.plugins 并重启。生活化扩展工具绑定在普通聊天场景，语音还需要有效参考音频和 TTS
-                配置。分类工具可能需要由模型按需加载。
-              </p>
+              <p>安装后还需要加入 clovers_agent.plugins 并重启。</p>
             </div>
           </details>
           <details>
@@ -607,10 +558,7 @@ skill_dirs = [&quot;./my_agent_skills&quot;]</code></pre>
           <details>
             <summary>文件、语音或跨群消息发送失败？</summary>
             <div>
-              <p>
-                核对平台适配器是否实现对应发送方法，并查看后台日志。console 首次发送本地文件前需创建
-                data/CloversConsole/stores_dir/file/；定向私聊仅支持当前事件发送者。
-              </p>
+              <p>核对平台适配器是否实现对应发送方法，并查看后台日志。</p>
             </div>
           </details>
           <details>
@@ -625,10 +573,6 @@ skill_dirs = [&quot;./my_agent_skills&quot;]</code></pre>
         </section>
         <section class="doc-section" id="sources">
           <h2>文档来源</h2>
-          <p>
-            本文依据下列项目文档整理，核对日期为 <strong>2026 年 11 月 12 日</strong>。对应文档中的源码版本为核心 0.3.9、工具集
-            0.3.6、生活化扩展 0.3.5；客户端使用说明基于 0.3.8。具体兼容范围以所安装版本的上游说明为准。
-          </p>
           <div class="source-links">
             <a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
               >Clovers Agent · 安装与运行机制 <span aria-hidden="true">↗</span></a
@@ -651,7 +595,7 @@ skill_dirs = [&quot;./my_agent_skills&quot;]</code></pre>
         </section>
         <section class="doc-section" id="related">
           <h2>相关项目</h2>
-          <p>按需了解 Clovers 生态。它们各自承担框架、宿主或接入工作，不是使用 Agent 必须全部安装的组件。</p>
+          <p>按需了解 Clovers 生态。</p>
           <div class="related-grid">
             <a href="https://clovers-project.github.io/#/" target="_blank" rel="noopener noreferrer"
               ><strong>Clovers <span aria-hidden="true">↗</span></strong>
