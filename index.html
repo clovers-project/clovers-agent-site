@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Clovers 的异步 Agent 后端，连接会话、记忆与工具，在你选择的宿主与聊天平台中运行。" />
-    <meta name="theme-color" content="#175D43" />
-    <meta property="og:title" content="Clovers Agent · 让智能融入每一次对话" />
-    <meta property="og:description" content="Clovers 的异步 Agent 后端，连接会话、记忆与工具，在你选择的宿主与聊天平台中运行。" />
+    <meta name="description" content="Clovers Agent 是运行于 Clovers 宿主的异步对话后端，负责会话、模型调用、记忆与工具调度。" />
+    <meta name="theme-color" content="#116746" />
+    <meta property="og:title" content="Clovers Agent · 对话、记忆与工具调用" />
+    <meta property="og:description" content="面向 Clovers 宿主的异步 Agent 后端。了解架构、快速启动，并按需接入平台、记忆和工具。" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://clovers-project.github.io/clovers-agent-site/assets/brand/og.png" />
-    <title>Clovers Agent · 让智能融入每一次对话</title>
+    <meta property="og:image" content="https://clovers-agent.karisaya.top/assets/brand/og.png" />
+    <title>Clovers Agent · 对话、记忆与工具调用</title>
     <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
     <link rel="icon" sizes="any" href="assets/brand/favicon.ico" />
     <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
@@ -48,12 +48,12 @@
     <main id="main">
       <section class="hero container">
         <div class="hero-copy">
-          <div class="eyebrow hero-eyebrow"><span class="status-dot"></span> CLOVERS 生态 · 异步 AGENT 后端</div>
+          <div class="eyebrow hero-eyebrow"><span class="status-dot"></span> CLOVERS AGENT · 异步对话后端</div>
           <h1>
-            让智能，<br />融入每一次<span class="hero-word"
-              >对话<svg viewBox="0 0 220 18" aria-hidden="true">
-                <path d="M4 11C65 1 140 2 215 9" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" /></svg></span
-            >。
+            Clovers<br /><span class="hero-word"
+              >Agent<svg viewBox="0 0 220 18" aria-hidden="true">
+                <path d="M4 11C65 1 140 2 215 9" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" /></svg
+            ></span>
           </h1>
           <p class="hero-description">
             从一句回应，到一件事的完成。<br />为你的 Clovers 宿主接入会话、记忆与工具，<br class="desktop-break" />让 Agent
@@ -73,12 +73,12 @@
           <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
           <div class="visual-label label-top"><span class="tiny-square"></span> ROOTED IN CONVERSATION</div>
           <img class="hero-logo" src="assets/brand/default.svg" width="360" height="360" alt="Clovers Agent" />
-          <div class="visual-label label-bottom">会回应，也会认真思考。<span>01 / CLOVERS AGENT</span></div>
+          <div class="visual-label label-bottom">会回应，也会认真思考。<span>CLOVERS AGENT</span></div>
         </div>
       </section>
       <div class="architecture-strip">
         <div class="container strip-inner">
-          <span class="strip-label">从平台到能力</span>
+          <span class="strip-label">消息如何抵达模型</span>
           <div class="strip-flow">
             <span>聊天平台 / 自定义前端</span><b aria-hidden="true">→</b><span>Clovers 宿主与适配器</span><b aria-hidden="true">→</b
             ><strong><img src="assets/brand/default.svg" alt="" width="28" height="28" />Agent 后端</strong><b aria-hidden="true">↔</b
@@ -89,7 +89,7 @@
       <section class="section container" id="about">
         <div class="section-heading">
           <div>
-            <span class="eyebrow">01 / MEET CLOVERS AGENT</span>
+            <span class="eyebrow">01 / WHAT IT DOES</span>
             <h2>对话是起点，<br />能力可以继续生长。</h2>
           </div>
           <p>Clovers Agent 是 Clovers 的异步群聊 Agent 插件。<br />核心组织会话与模型调用，扩展带来更多行动方式。</p>
@@ -103,8 +103,8 @@
                 <path d="m15 33-3 8 13-8M16 18h16M16 24h10" />
               </svg>
             </div>
-            <h3>在群聊中，理解上下文</h3>
-            <p>按会话组织消息，让定向回复、场景路由和条件触发的主动插话，各有自己的位置。</p>
+            <h3>按会话组织消息</h3>
+            <p>支持定向处理、场景路由，以及受冷却和会话状态约束的主动回复。</p>
             <a href="docs.html#sessions">了解会话机制 <span aria-hidden="true">↗</span></a>
           </article>
           <article class="feature">
@@ -112,8 +112,8 @@
               <span class="feature-number">02</span
               ><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 11h24v27H9zM15 5h24v27M15 19h12M15 25h12M15 31h7" /></svg>
             </div>
-            <h3>让记忆，随对话积累</h3>
-            <p>核心保存完成轮次并生成历史摘要；搭配生活化扩展，进一步召回话题、维护用户画像。</p>
+            <h3>把历史留在可查的位置</h3>
+            <p>核心记录完成轮次并按条件生成摘要；可选扩展再提供历史召回与用户画像维护。</p>
             <a href="docs.html#memory">了解记忆与历史 <span aria-hidden="true">↗</span></a>
           </article>
           <article class="feature">
@@ -121,7 +121,7 @@
               <span class="feature-number">03</span
               ><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m17 14-10 10 10 10M31 14l10 10-10 10M27 9l-6 30" /></svg>
             </div>
-            <h3>把想法，交给工具执行</h3>
+            <h3>按需调用工具</h3>
             <p>用 Python 插件和 Markdown Skill 扩展能力，按需加载工具，让对话连接具体任务。</p>
             <a href="docs.html#extensions">了解扩展方式 <span aria-hidden="true">↗</span></a>
           </article>
@@ -130,7 +130,7 @@
       <section class="host-section">
         <div class="container host-grid">
           <div>
-            <span class="eyebrow">02 / YOUR HOST, YOUR EXPERIENCE</span>
+            <span class="eyebrow">02 / HOST &amp; ADAPTER</span>
             <h2>在你选择的平台，<br />以你熟悉的方式。</h2>
             <p>Agent 负责后端的思考与执行。消息从哪里来、如何呈现，由 Clovers 宿主与平台适配器实现。</p>
             <p>网页控制台适合开始与联调；更多实际场景，是把 Agent 接入已有聊天平台。</p>
@@ -144,7 +144,7 @@
             </div>
             <div class="diagram-arrow" aria-hidden="true">↓</div>
             <div class="agent-node">
-              <img src="assets/brand/reverse.svg" alt="" width="64" height="64" />
+              <img src="assets/brand/default.svg" alt="" width="64" height="64" />
               <div><span>思考与执行</span><strong>clovers agent</strong></div>
               <span class="node-tag">BACKEND</span>
             </div>
@@ -156,7 +156,7 @@
         <div class="life-card">
           <div class="life-art"><img src="assets/brand/thinking.svg" alt="" width="180" height="180" /><span>GROW WITH MEMORY.</span></div>
           <div class="life-copy">
-            <span class="eyebrow">03 / LIFE EXTENSIONS · 可选扩展</span>
+            <span class="eyebrow">03 / OPTIONAL · LIFE EXTENSIONS</span>
             <h2>记得聊过的事，<br />也记得眼前的你。</h2>
             <p>生活化扩展为普通聊天加入历史召回与用户画像，并提供贴纸、语音和定向消息工具，让交流有更多表达方式。</p>
             <div class="life-tags"><span>历史召回</span><span>用户画像</span><span>贴纸与语音</span></div>
@@ -167,7 +167,7 @@
       </section>
       <section class="get-started container">
         <div>
-          <span class="eyebrow">LET'S GET GROWING</span>
+          <span class="eyebrow">04 / LET'S RUN IT</span>
           <h2>从第一条回复开始。</h2>
           <p>准备一个模型接入点，用 console 宿主跑通完整链路。</p>
         </div>
@@ -177,7 +177,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <a class="footer-brand" href="./"><img src="assets/brand/default.svg" width="36" height="36" alt="" /><span>clovers agent</span></a>
-        <p>让对话生长，让能力连接。</p>
+        <p>会话、上下文与工具调用。</p>
         <div>
           <a href="docs.html#sources">文档来源</a><a href="docs.html#related">相关项目</a
           ><a href="https://github.com/clovers-project/clovers-agent" target="_blank" rel="noopener noreferrer"
